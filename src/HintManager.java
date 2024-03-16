@@ -1,8 +1,8 @@
 import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 
 public class HintManager {
     private int[] randomNumbers = new int[3];
@@ -27,17 +27,24 @@ public class HintManager {
     }
 
     // ------------------------------------------public methods
-    public void checkUserInput(){
+    public void checkUserInput(){ 
+        // list to store numbers that are used already to check for
+        List<Integer> alreadyUsed = new ArrayList<>();
+
         for (int i = 0; i < userInput.length; i++){
             int num1 = userInput[i];
             boolean numFound = false;
-            if (num1 == randomNumbers[i]){
-            hintReturn[i] = "Fermi";
-            numFound = true;
+            // check if num1 matches the number in the same index in Randomnumbers array and make sure num1 does not exist in the already used list
+            if (num1 == randomNumbers[i] && !alreadyUsed.contains(num1)){
+                hintReturn[i] = "Fermi";
+                alreadyUsed.add(num1);
+                numFound = true;
             } else {
+                // checks if num1 matches any number in the random numbers array  
                 for (int num2 : randomNumbers){
-                    if(num1 == num2){
+                    if(num1 == num2 && !alreadyUsed.contains(num1)){
                         hintReturn[i]= "Pico";
+                        alreadyUsed.add(num1);
                         numFound = true;
                         break;
                     }
@@ -48,10 +55,8 @@ public class HintManager {
             }
        
         }
+        // shuffles the order of the hintReturn Array
         Collections.shuffle(Arrays.asList(hintReturn));
-        System.out.println(hintReturn[0]);
-        System.out.println(hintReturn[1]);
-        System.out.println(hintReturn[2]);
      
     }
     public void populateRandList(){
