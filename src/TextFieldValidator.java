@@ -9,13 +9,13 @@ public class TextFieldValidator {
     private JTextField fieldToTest;
 
     // -----------------------------constructor methods
-    public TextFieldValidator (JTextField targetField, Color myErrorColor){
-        this.fieldToTest = targetField;
+    public TextFieldValidator (JTextField myTarget, Color myErrorColor){
+        this.fieldToTest = myTarget;
         this.errorColor = myErrorColor;
     };
 
-    public TextFieldValidator (JTextField targetField){
-        this.fieldToTest = targetField;
+    public TextFieldValidator (JTextField myTarget){
+        this.fieldToTest = myTarget;
         this.errorColor = Color.RED;
     };
 
@@ -38,8 +38,10 @@ public class TextFieldValidator {
     public Boolean check(){
         String textToTest = fieldToTest.getText();
         if (textToTest.matches(regExp)){
+            this.reset();
             return true;
         } else {
+            fieldToTest.setBorder(BorderFactory.createLineBorder(errorColor,1));
             return false;
         }
     };
