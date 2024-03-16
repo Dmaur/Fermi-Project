@@ -13,6 +13,8 @@ public class Window extends JFrame {
     private JTextField numOne;
     private JTextField numTwo;
     private JTextField numThree;
+    private JButton okay;
+    private Border startBorder = BorderFactory.createLineBorder(Color.BLACK,1);
 
 // ****************************************************************Window constructor **********************************************************
 public Window(){
@@ -31,7 +33,31 @@ public Window(){
 
     // setting up the left pannel with the buttons and text fields. 
     leftPanel = new JPanel();
+    leftPanel.setSize(200,400);
+    leftPanel.setLayout(new MigLayout("",
+                                        "[240]",
+                                        "30[]10[]10[]10[]10[30]140[30]"));
     JLabel enterMsg = new JLabel("Enter your three guesses (0-9)");
+    numOne = new JTextField(8);
+    numTwo = new JTextField(8);
+    numThree = new JTextField(8);
+    numOne.setBorder(startBorder);
+    numTwo.setBorder(startBorder);
+    numThree.setBorder(startBorder);
+    okay = new JButton("OK");
+    okay.setPreferredSize(new Dimension(100,0));
+    JButton reset = new JButton("Reset");
+    reset.setPreferredSize(new Dimension(100,0));
+   
+    //adding all the contents to the left panel.  
+    leftPanel.add(enterMsg,"wrap");
+    leftPanel.add(numOne, "wrap");
+    leftPanel.add(numTwo,"wrap");
+    leftPanel.add(numThree,"wrap");
+    leftPanel.add(okay,"wrap");
+    leftPanel.add(reset,"wrap");
+
+    mainPanel.add
 }
 
 
