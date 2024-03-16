@@ -57,7 +57,23 @@ public Window(){
     leftPanel.add(okay,"wrap");
     leftPanel.add(reset,"wrap");
 
-    mainPanel.add
+
+     // setting up the right panel with text area and lable. 
+    rightPanel = new JPanel();
+    rightPanel.setSize(200,400);
+    rightPanel.setLayout(new MigLayout("",
+                                        "[]",
+                                        "[]10[]120"));
+    JLabel hints = new JLabel("Hints:");
+    JTextArea gameOutput = new JTextArea();
+    gameOutput.setPreferredSize(new Dimension(240,280));
+    gameOutput.setBorder( startBorder);
+    // adding contents to the rightPanel. 
+    rightPanel.add(hints,"wrap");
+    rightPanel.add(gameOutput);
+   
+    mainPanel.add(leftPanel);
+    mainPanel.add(rightPanel);
 }
 
 
