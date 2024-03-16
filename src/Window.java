@@ -15,8 +15,10 @@ public class Window extends JFrame {
     private JTextField numThree;
     private String gameRegEx = "[0-9]";
     private JButton okay;
+    private JTextArea gameOutput;
     private TextFieldValidator one, two, three;
     private TextFieldValidator[] tfvo;
+    private HintManager game = new HintManager();
     private Border startBorder = BorderFactory.createLineBorder(Color.BLACK,1);
 
 // ****************************************************************Window constructor **********************************************************
@@ -80,7 +82,7 @@ public class Window extends JFrame {
                                             "[]",
                                             "[]10[]120"));
         JLabel hints = new JLabel("Hints:");
-        JTextArea gameOutput = new JTextArea();
+        gameOutput = new JTextArea();
         gameOutput.setPreferredSize(new Dimension(240,280));
         gameOutput.setBorder( startBorder);
         // adding contents to the rightPanel. 
@@ -94,37 +96,41 @@ public class Window extends JFrame {
 
     // --------------------------------------------BUTTON event handlers
     public void okClicked(ActionEvent e ){
+        // string array to hold guesses to be passed to HintManager
+        int [] guesses = new int[3];
         // making TextFieldValidator objects
         one = new TextFieldValidator(numOne);
         two = new TextFieldValidator(numTwo);
         three = new TextFieldValidator(numThree);
+        
         // storing the objects in tfvo list
         tfvo = new TextFieldValidator[3];
         tfvo[0] = one;
         tfvo[1] = two;
         tfvo[2] = three;
+        int i = -1;
+        // for loop to test all input againts the gameregex and store the value if it returns true, 404 if returns false. 
         for (TextFieldValidator val : tfvo){
+            i++;
             val.setRegExp(gameRegEx);
             boolean isValid = val.check();
+            if(isValid){
+                guesses[i] = Integer.parseInt(val.getJTextField().getText());    
+            }else {
+                // lol error 404, get it?
+                guesses[i] = 404;
+            }
         }
+        // if all inputs are valid, start game with hintmanager
+        if (guesses[0] != 404 && guesses[1] != 404 && guesses[2] != 404 ){
+            game.setUserInput(guesses);
+            game.checkUserInput();
+            gameOutput.setText(game.displayOutcome());
 
-        
-        
-        
-        System.out.println(tfvo[0].check());
-
-
-        // one.setRegExp(gameRegEx);
-        // two.setRegExp(gameRegEx);
-        // three.setRegExp(gameRegEx);
-        // if (one.check()==true && two.check()==true && three.check()==true){
-        //     System.out.println("all True");
-        // }else {
-        //     System.out.println("error");
-        // }
-        // one.check();
-        // two.check();
-        // three.check();
+            // System.out.println("all good");
+        }else{
+            // System.out.println("some Bad");
+        }
 
     }
 
@@ -132,6 +138,9 @@ public class Window extends JFrame {
         numOne.setText("");
         numTwo.setText("");
         numThree.setText("");
+        gameOutput.setText("");
+        game.populateRandList();
+        
     }
 
 
