@@ -1,6 +1,8 @@
 import java.util.Random;
+import java.util.Set;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class HintManager {
     private int[] randomNumbers = new int[3];
@@ -26,7 +28,6 @@ public class HintManager {
 
     // ------------------------------------------public methods
     public void checkUserInput(){
-    
         for (int i = 0; i < userInput.length; i++){
             int num1 = userInput[i];
             boolean numFound = false;
