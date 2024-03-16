@@ -94,6 +94,8 @@ public class Window extends JFrame {
 
     // --------------------------------------------BUTTON event handlers
     public void okClicked(ActionEvent e ){
+        // string array to hold guesses to be passed to HintManager
+        int [] guesses = new int[3];
         // making TextFieldValidator objects
         one = new TextFieldValidator(numOne);
         two = new TextFieldValidator(numTwo);
@@ -103,15 +105,34 @@ public class Window extends JFrame {
         tfvo[0] = one;
         tfvo[1] = two;
         tfvo[2] = three;
+        int i = -1;
+        // for loop to test all input againts the gameregex and store the value if it returns true, null if returns false. 
         for (TextFieldValidator val : tfvo){
+            i++;
             val.setRegExp(gameRegEx);
             boolean isValid = val.check();
+            if(isValid){
+                guesses[i] = Integer.parseInt(val.getJTextField().getText());    
+            }else {
+                // lol error 404, get it?
+                guesses[i] = 404;
+            }
         }
+        // if all inputs are valid, start game with hintmanager
+        if (guesses[0] != 404 && guesses[1] != 404 && guesses[2] != 404 ){
+            HintManager game = new HintManager(guesses);
+
+            // System.out.println("all good");
+        }else{
+            // System.out.println("some Bad");
+        }
+        // System.out.println(guesses[0]);
+        // System.out.println(guesses[1]);
+        // System.out.println(guesses[2]);
 
         
         
         
-        System.out.println(tfvo[0].check());
 
 
         // one.setRegExp(gameRegEx);
@@ -132,6 +153,7 @@ public class Window extends JFrame {
         numOne.setText("");
         numTwo.setText("");
         numThree.setText("");
+        
     }
 
 
