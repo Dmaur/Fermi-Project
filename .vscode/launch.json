@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Window",
+            "request": "launch",
+            "mainClass": "Window",
+            "projectName": "FermiProject_821daf28"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
