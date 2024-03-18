@@ -126,12 +126,19 @@ public class Window extends JFrame {
             game.setUserInput(guesses);
             game.checkUserInput();
             gameOutput.setText(game.displayOutcome());
+            // if (game.getHintReturn()[0] == game.getHintReturn()[1] && game.getHintReturn()[0] == game.getHintReturn()[2]){
+            //     okay.setEnabled(false);
+            //     numOne.setEnabled(false);
+            //     numTwo.setEnabled(false);
+            //     numThree.setEnabled(false);
+            //     gameOutput.append("\nWINNER");
+            // }
 
             // System.out.println("all good");
         }else{
-            // System.out.println("some Bad");
+             System.out.println("ERROR: bad input");
         }
-
+       
     }
 
     public void resetClicked(ActionEvent e ){
@@ -140,6 +147,10 @@ public class Window extends JFrame {
         numThree.setText("");
         gameOutput.setText("");
         game.populateRandList();
+        okay.setEnabled(true);
+        numOne.setEnabled(true);
+        numTwo.setEnabled(true);
+        numThree.setEnabled(true);
         
     }
 
