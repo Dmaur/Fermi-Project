@@ -15,6 +15,8 @@ public class Window extends JFrame {
     private JTextField numThree;
     private String gameRegEx = "[0-9]";
     private JButton okay;
+    private int guessCounter = 1 ;
+    // private JScrollPane outputPane;
     private JTextArea gameOutput;
     private TextFieldValidator one, two, three;
     private TextFieldValidator[] tfvo;
@@ -82,12 +84,18 @@ public class Window extends JFrame {
                                             "[]",
                                             "[]10[]120"));
         JLabel hints = new JLabel("Hints:");
-        gameOutput = new JTextArea();
-        gameOutput.setPreferredSize(new Dimension(240,280));
-        gameOutput.setBorder( startBorder);
+        gameOutput = new JTextArea(17,30);
+        gameOutput.setLineWrap(true);
+        gameOutput.setEditable(false);
+        // gameOutput.setPreferredSize(new Dimension(240,280));
+        gameOutput.setBorder(startBorder);
+
         // adding contents to the rightPanel. 
         rightPanel.add(hints,"wrap");
-        rightPanel.add(gameOutput);
+        JScrollPane outputPane = new JScrollPane(gameOutput);
+        outputPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        rightPanel.add(outputPane);
+       
     
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
@@ -96,6 +104,7 @@ public class Window extends JFrame {
 
     // --------------------------------------------BUTTON event handlers
     public void okClicked(ActionEvent e ){
+    
         // string array to hold guesses to be passed to HintManager
         int [] guesses = new int[3];
         // making TextFieldValidator objects
@@ -115,24 +124,27 @@ public class Window extends JFrame {
             val.setRegExp(gameRegEx);
             boolean isValid = val.check();
             if(isValid){
+                val.reset();
                 guesses[i] = Integer.parseInt(val.getJTextField().getText());    
             }else {
-                // lol error 404, get it?
                 guesses[i] = 404;
             }
         }
         // if all inputs are valid, start game with hintmanager
+        
+        String winner = String.format(" You WIN!\n you made %d guesses", guessCounter);
         if (guesses[0] != 404 && guesses[1] != 404 && guesses[2] != 404 ){
+            guessCounter++ ;
             game.setUserInput(guesses);
             game.checkUserInput();
-            gameOutput.setText(game.displayOutcome());
-            // if (game.getHintReturn()[0] == game.getHintReturn()[1] && game.getHintReturn()[0] == game.getHintReturn()[2]){
-            //     okay.setEnabled(false);
-            //     numOne.setEnabled(false);
-            //     numTwo.setEnabled(false);
-            //     numThree.setEnabled(false);
-            //     gameOutput.append("\nWINNER");
-            // }
+            gameOutput.append(game.displayOutcome());
+            if (game.getHintReturn()[0] == "Fermi" && game.getHintReturn()[1] == "Fermi" && game.getHintReturn()[2] == "Fermi"){
+                okay.setEnabled(false);
+                numOne.setEnabled(false);
+                numTwo.setEnabled(false);
+                numThree.setEnabled(false);
+                gameOutput.append(winner);
+            }
 
             // System.out.println("all good");
         }else{

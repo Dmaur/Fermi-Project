@@ -30,6 +30,7 @@ public class HintManager {
     } 
 
     // ------------------------------------------public methods
+   
     public void checkUserInput(){ 
         // list to store numbers that are used already to check for
         ArrayList<Integer> alreadyUsed = new ArrayList<>();
@@ -80,10 +81,9 @@ public class HintManager {
             
         }
         System.out.printf("number gnerated: %d%d%d \n",randomNumbers[0],randomNumbers[1],randomNumbers[2]);
-    // --------------------------------------------private methods
     }
     public String displayOutcome(){
 
-        return hintReturn[0]+ hintReturn[1]+hintReturn[2];
+        return " "+userInput[0]+" "+userInput[1]+" "+userInput[2]+" : "+hintReturn[0]+" "+ hintReturn[1]+" "+hintReturn[2] + "\n";
     }
 }

@@ -38,7 +38,6 @@ public class TextFieldValidator {
     public Boolean check(){
         String textToTest = fieldToTest.getText();
         if (textToTest.matches(regExp)){
-            this.reset();
             return true;
         } else {
             fieldToTest.setBorder(BorderFactory.createLineBorder(errorColor,1));
