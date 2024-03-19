@@ -154,6 +154,7 @@ public class Window extends JFrame {
     }
 
     public void resetClicked(ActionEvent e ){
+        guessCounter = 1;
         numOne.setText("");
         numTwo.setText("");
         numThree.setText("");
