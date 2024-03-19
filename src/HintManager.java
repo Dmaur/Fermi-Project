@@ -21,8 +21,6 @@ public class HintManager {
     // -----------------------------------------------------gets/sets
     public void setUserInput(int[]userGuesses){
         userInput = userGuesses;
-        // System.out.printf(" user guess: %d%d%d\n", userInput[0],userInput[1],userInput[2]);
-
         
     }
     public String[] getHintReturn(){
@@ -33,7 +31,7 @@ public class HintManager {
    
     public void checkUserInput(){
         ArrayList<Integer> alreadyUsed = new ArrayList<>();
-    // alreadyUsed.clear();
+        // alreadyUsed.clear();
         for (int i = 0; i < userInput.length; i++){
             int num1 = userInput[i];
             boolean numFound = false;
@@ -55,12 +53,9 @@ public class HintManager {
                     hintReturn[i] = "Nano";
                 }
             }
-            
-            }
+        }
             Collections.shuffle(Arrays.asList(hintReturn));
-
-   
-    }
+        }
 
       
      
