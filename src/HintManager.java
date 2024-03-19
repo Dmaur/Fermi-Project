@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+// import java.util.Arrays;
+// import java.util.Collections;
 // import java.util.List;
 
 public class HintManager {
@@ -21,7 +21,7 @@ public class HintManager {
     // -----------------------------------------------------gets/sets
     public void setUserInput(int[]userGuesses){
         userInput = userGuesses;
-        System.out.printf(" user guess: %d%d%d\n", userInput[0],userInput[1],userInput[2]);
+        // System.out.printf(" user guess: %d%d%d\n", userInput[0],userInput[1],userInput[2]);
 
         
     }
@@ -31,37 +31,33 @@ public class HintManager {
 
     // ------------------------------------------public methods
    
-    public void checkUserInput(){ 
-        // list to store numbers that are used already to check for
-        ArrayList<Integer> alreadyUsed = new ArrayList<>();
-        // alreadyUsed.clear();
-        for (int i = 0; i < userInput.length; i++){
-            int num1 = userInput[i];
-            boolean numFound = false;
-            for (int num2: randomNumbers){
-                if (!alreadyUsed.contains(num1)){
-                    if (num1 == randomNumbers[i]){
-                        hintReturn[i] = "Fermi";
-                        alreadyUsed.add(num1);
-                        numFound = true;
-                    }else if(num1 == num2){
-                        hintReturn[i] = "Pico";
-                        alreadyUsed.add(num1);
-                        numFound = true;
-                    }else{
-                        hintReturn[i]= "Nano";
-                    }
-                
-                }if(!numFound){
-                    hintReturn[i] = "Nano";
+    public void checkUserInput(){
+       ArrayList<Integer> alreadyUsed = new ArrayList<>();
+       alreadyUsed.clear();
+       for (int i=0;i<userInput.length; i++){
+            if (userInput[i] == randomNumbers[i]){
+                hintReturn[i] = "Fermi";
+                alreadyUsed.add(userInput[i]);
+            }else{
+               for (int j =0;j<randomNumbers.length;j++){
+                if(!alreadyUsed.contains(userInput[i])&& userInput[i]==randomNumbers[j]){
+                    hintReturn[i] ="Pico";
+                    alreadyUsed.add(userInput[i]);
+                }else{
+                    hintReturn[i]= "Nano";
                 }
-             }
-
+               }
             }
-         
-        Collections.shuffle(Arrays.asList(hintReturn));
         }
-        // shuffles the order of the hintReturn Array
+    }
+
+      
+     
+
+
+
+
+       
        
      
     
@@ -89,13 +85,69 @@ public class HintManager {
     }
 }
 
+ // //   list to store numbers that are used already to check for
+        // ArrayList<Integer> alreadyUsed = new ArrayList<>();
+        // for (int i = 0; i < userInput.length; i++){
+        //     int num1 = userInput[i];
+        //     boolean numFound = false;
+        //     for (int num2: randomNumbers){
+        //         if (!alreadyUsed.contains(num1)){
+        //             if (num1 == randomNumbers[i]){
+        //                 hintReturn[i] = "Fermi";
+        //                 alreadyUsed.add(num1);
+        //                 numFound = true;
+        //             }else if(num1 == num2){
+        //                 hintReturn[i] = "Pico";
+        //                 alreadyUsed.add(num1);
+        //                 numFound = true;
+        //             }else{
+        //                 hintReturn[i]= "Nano";
+        //             }
+            
+        //         }if(!numFound){
+        //             hintReturn[i] = "Nano";
+        //         }
+        //     }
+
+        //     }
+    
+        // Collections.shuffle(Arrays.asList(hintReturn));
 
 
 
 
 
 
+//  // list to store numbers that are used already to check for
+//  ArrayList<Integer> alreadyUsed = new ArrayList<>();
+//  // alreadyUsed.clear();
+//  for (int i = 0; i < userInput.length; i++){
+//      int num1 = userInput[i];
+//      boolean numFound = false;
+//      for (int num2: randomNumbers){
+//          if (!alreadyUsed.contains(num1)){
+//              if (num1 == randomNumbers[i]){
+//                  hintReturn[i] = "Fermi";
+//                  alreadyUsed.add(num1);
+//                  numFound = true;
+//              }else if(num1 == num2){
+//                  hintReturn[i] = "Pico";
+//                  alreadyUsed.add(num1);
+//                  numFound = true;
+//              }else{
+//                  hintReturn[i]= "Nano";
+//              }
+         
+//          }if(!numFound){
+//              hintReturn[i] = "Nano";
+//          }
+//       }
 
+//      }
+  
+//  Collections.shuffle(Arrays.asList(hintReturn));
+//  }
+//  // shuffles the order of the hintReturn Array
 
 
 
